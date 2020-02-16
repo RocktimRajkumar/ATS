@@ -1,18 +1,28 @@
 import json
+import boto3
+import base64
 
 
-def hello(event, context):
-    body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
+s3 = boto3.client('s3')
+
+BUCKET_NAME = 'poc-cloudformation-bucket'
+
+def upload_file(event, context):
+    file_content = base64.b64decode(event['content'])
+    file_path = 'file.png'
+    try:
+        s3_response = s3.put_object(Bucket=BUCKET_NAME, Key=file_path, Body=file_content)
+    except Exception as e:
+        raise IOError(e)
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': True
+        },
+        'body': json.dumps(file_path)
     }
 
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
-
-    return response
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY
     # integration
