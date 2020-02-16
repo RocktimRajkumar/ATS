@@ -9,7 +9,7 @@ BUCKET_NAME = 'poc-cloudformation-bucket'
 def upload_file(event, context):
     s3 = boto3.client('s3')
     file_content = base64.b64decode(event['content'])
-    file_path = 'file.png'
+    file_path = 'cv.pdf'
     try:
         s3_response = s3.put_object(Bucket=BUCKET_NAME, Key=file_path, Body=file_content)
     except Exception as e:
