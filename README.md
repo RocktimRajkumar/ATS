@@ -3,7 +3,7 @@
 
 > serverless config credentials --provider "replace provider" --key "replace Access key" --secret "replace secret key"
 
-> serverless deploy [move to serverless directory and run]
+> serverless deploy [move to serverless directory and run the command]
 
 # Command
 > npm install -g serverless
