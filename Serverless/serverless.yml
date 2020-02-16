@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: serverless
+service: uploadFile
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -27,7 +27,8 @@ provider:
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
-
+iamManagedPolicies:
+  - arn:aws:iam::aws:policy/AmazonS3FullAccess
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -58,8 +59,23 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  upload_file:
+    handler: handler.upload_file
+    events:
+      - http:
+          path: s3/upload_file
+          method: post
+          cors: true
+          # contentHandling: CONVERT_TO_BINARY
+          integration: lambda
+          request:
+            passThrough: WHEN_NO_MATCH
+            template:
+              image/png: '{"content": "$input.body"}'
+              image/jpeg: '{"content": "$input.body"}'
+              application/json: '{"content": "$input.body"}'
+              application/pdf: '{"content": "$input.body"}'
+              application/x-www-form-urlencoded: '{"content": "$input.body"}'
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -101,12 +117,12 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
+resources:
+  Resources:
+    NewResource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: poc-cloudformation-bucket
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
