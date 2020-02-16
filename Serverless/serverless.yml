@@ -24,11 +24,15 @@ provider:
   name: aws
   runtime: python3.8
 
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
+
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
-iamManagedPolicies:
-  - arn:aws:iam::aws:policy/AmazonS3FullAccess
+  iamManagedPolicies:
+    - arn:aws:iam::aws:policy/AmazonS3FullAccess
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
