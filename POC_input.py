@@ -2,6 +2,8 @@ import boto3
 import time
 import json
 from json.decoder import JSONDecodeError
+import os
+from os import path
 
 textract = boto3.client('textract')
 
@@ -43,7 +45,7 @@ def format_input(response):
     input_format = []
     id = 1
     for item in response['Blocks']:
-        if item['BlockType'] == 'LINE' and item['Page']==1:
+        if item['BlockType'] == 'LINE' and item['Page'] == 1:
             obj = {}
             obj['eId'] = id
             obj['geometry'] = item['Geometry']['BoundingBox']
@@ -55,6 +57,13 @@ def format_input(response):
 
 
 def save_input_format(input_format, jobId):
+
+    if not path.exists("input_format_mapping.json"):
+        with open('input_format_mapping.json', 'w+') as p:
+            p.close()
+    if not path.isdir("input_format"):
+        os.mkdir("input_format")
+
     with open('input_format_mapping.json', "r+") as f:
         try:
             content = json.load(f)

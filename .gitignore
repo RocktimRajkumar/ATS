@@ -1,2 +1,4 @@
 input_format
 input_format_mapping.json
+template/group_element
+*__pycache__

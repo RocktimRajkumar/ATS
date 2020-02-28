@@ -2,6 +2,9 @@ import json
 import boto3
 from PIL import Image, ImageDraw
 from pdf2image import convert_from_bytes
+from Rect import Rect
+import os
+from os import path
 
 s3 = boto3.resource('s3')
 
@@ -25,45 +28,12 @@ def load_input_format():
         return input_format
 
 
-class Rect:
-
-    img_dim = 0
-
-    def __init__(self, shape):
-        super().__init__()
-        normalized_bounding_box = shape['geometry']
-        absolute_bounding_box_width = normalized_bounding_box['Width'] * \
-            Rect.img_dim[0]
-        absolute_bounding_box_height = normalized_bounding_box['Height'] * \
-            Rect.img_dim[1]
-
-        self.x0 = normalized_bounding_box['Left'] * Rect.img_dim[0]
-        self.y0 = normalized_bounding_box['Top'] * Rect.img_dim[1]
-        self.x1 = self.x0 + absolute_bounding_box_width
-        self.y1 = self.y0 + absolute_bounding_box_height
-
-    def dist(self, other):
-        # overlaps in x or y:
-        print('diff ---', self.x-other.x)
-        print('width ---', self.w+other.w)
-
-        if abs(self.x - other.x) <= (self.w + other.w):
-            dx = 0
-        else:
-            dx = abs(self.x - other.x) - (self.w + other.w)
-        #
-        if abs(self.y - other.y) <= (self.h + other.h):
-            dy = 0
-        else:
-            dy = abs(self.y - other.y) - (self.h + other.h)
-        return math.sqrt(dx + dy)
-
 def convertPDFtoImage():
     obj = s3.Object('poc-cloudformation-bucket', fileName)
     parse = obj.get()['Body'].read()
     images = convert_from_bytes(parse)
-    print(images[0])
     return images
+
 
 def createShape(input_format, images):
     shapes = []
@@ -83,6 +53,7 @@ def createShape(input_format, images):
         shapes.append(shape)
     return shapes
 
+
 def draw_bounding_box(image, shapes):
     boxed_image = ImageDraw.Draw(image)
 
@@ -91,12 +62,38 @@ def draw_bounding_box(image, shapes):
     return boxed_image
 
 
+def grouping_element(input_formats, templates):
+    group_elements = []
+    for template in templates:
+        group_elem = None
+        group_elem = template
+        elements = []
+        for input_format in input_formats:
+            group = Rect(template, create='No')
+            elem = Rect(input_format)
+            if(group.check_box_inside_group(elem)):
+                elements.append(input_format)
+        group_elem["elements"] = elements
+        group_elements.append(group_elem)
+
+    if not path.isdir("template/group_element"):
+        os.mkdir("template/group_element")
+
+    with open('./template/group_element/{0}.json'.format(fileName), 'w+') as f:
+        f.write(json.dumps(group_elements))
+    return group_elements
+
+
 template = load_template()
 images = convertPDFtoImage()
 input_format = load_input_format()
 shapes = createShape(input_format, images)
 
 bounding_box_img = draw_bounding_box(images[0], shapes)
+
 images[0].show()
+# images[0].save("box.png",'PNG')
 
 Rect.img_dim = images[0].size
+
+group_elem = grouping_element(input_format, template['group'])
