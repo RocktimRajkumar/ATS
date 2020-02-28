@@ -1,10 +1,13 @@
 import boto3
 import time
 import json
+from json.decoder import JSONDecodeError
 
 textract = boto3.client('textract')
 
-s3_obj = {"Bucket": "poc-cloudformation-bucket", "Name": "cv_test.pdf"}
+fileName = "invoice.pdf"
+
+s3_obj = {"Bucket": "poc-cloudformation-bucket", "Name": fileName}
 
 
 def startJob(s3_obj):
@@ -42,17 +45,31 @@ def format_input(response):
     for item in response['Blocks']:
         if item['BlockType'] == 'LINE':
             obj = {}
-            obj['eId']=id
-            obj['geometry']=item['Geometry']['BoundingBox']
-            obj['text']=item['Text']
-            obj['Confidence']=item['Confidence']
+            obj['eId'] = id
+            obj['geometry'] = item['Geometry']['BoundingBox']
+            obj['text'] = item['Text']
+            obj['Confidence'] = item['Confidence']
             input_format.append(obj)
-            id+=1
+            id += 1
     return input_format
 
-def save_input_format(input_format,jobId):
-    with open('input_format/{0}.json'.format(jobId),"w") as outFile:
-        outFile.write(json.dumps(input_format))
+
+def save_input_format(input_format, jobId):
+    with open('input_format_mapping.json', "r+") as f:
+        try:
+            content = json.load(f)
+            content[fileName] = 'input_format/{0}.json'.format(jobId)
+            f.seek(0)
+            f.truncate(0)
+            f.write(json.dumps(content))
+        except JSONDecodeError:
+            content = {}
+            content[fileName] = 'input_format/{0}.json'.format(jobId)
+            f.write(json.dumps(content))
+
+        with open('input_format/{0}.json'.format(jobId), "w") as outFile:
+            outFile.write(json.dumps(input_format))
+
 
 jobId = startJob(s3_obj)
 if(isJobComplete(jobId)):
@@ -62,7 +79,7 @@ if(isJobComplete(jobId)):
 
 
 input_format = format_input(response)
-save_input_format(input_format,jobId)
+save_input_format(input_format, jobId)
 
 print('--------------------------------')
 print(input_format)

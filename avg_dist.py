@@ -90,6 +90,7 @@ shapes = createShape(input_format, images)
 
 bounding_box_img = draw_bounding_box(images[0], shapes)
 
+images[0].save("./template/template.png", 'PNG')
 images[0].show()
 
 Rect.img_dim = images[0].size
