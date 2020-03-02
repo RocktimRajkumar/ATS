@@ -10,6 +10,7 @@ s3 = boto3.resource('s3')
 
 
 fileName = "invoice.pdf"
+bucketName = "poc-cloudformation-bucket"
 
 # function load predefined template co-ordinate from template.json file
 
@@ -37,7 +38,7 @@ def load_input_format():
 
 
 def convertPDFtoImage():
-    obj = s3.Object('poc-cloudformation-bucket', fileName)
+    obj = s3.Object(bucketName, fileName)
     parse = obj.get()['Body'].read()
     images = convert_from_bytes(parse)
     return images
