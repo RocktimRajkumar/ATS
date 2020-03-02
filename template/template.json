@@ -1,1 +1,44 @@
-{"resolution":{"width":1654,"height":2339},"group":[{"gid":"1","gname":"billing_from","desc":"billing from group","x0":44,"y0":396,"x1":782,"y1":814},{"gid":"2","gname":"billing_to","desc":"billing to group","x0":800,"y0":396,"x1":1536,"y1":814}]}
+{
+    "resolution": {
+        "width": 1654,
+        "height": 2339
+    },
+    "group": [
+        {
+            "gid": "0",
+            "gname": "company_name",
+            "desc": "Company Name Group",
+            "x0": 70,
+            "y0": 60,
+            "x1": 639,
+            "y1": 404
+        },
+        {
+            "gid": "1",
+            "gname": "sales_invoice",
+            "desc": "Sales invoice group",
+            "x0": 1046,
+            "y0": 70,
+            "x1": 1625,
+            "y1": 375
+        },
+        {
+            "gid": "2",
+            "gname": "billing_from",
+            "desc": "billing from group",
+            "x0": 44,
+            "y0": 396,
+            "x1": 782,
+            "y1": 814
+        },
+        {
+            "gid": "3",
+            "gname": "billing_to",
+            "desc": "billing to group",
+            "x0": 800,
+            "y0": 396,
+            "x1": 1536,
+            "y1": 814
+        }
+    ]
+}

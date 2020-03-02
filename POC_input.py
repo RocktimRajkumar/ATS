@@ -8,8 +8,9 @@ from os import path
 textract = boto3.client('textract')
 
 fileName = "invoice.pdf"
+bucketName = "poc-cloudformation-bucket"
 
-s3_obj = {"Bucket": "poc-cloudformation-bucket", "Name": fileName}
+s3_obj = {"Bucket": bucketName, "Name": fileName}
 
 
 def startJob(s3_obj):

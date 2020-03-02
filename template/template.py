@@ -11,11 +11,17 @@ s3 = boto3.resource('s3')
 
 fileName = "invoice.pdf"
 
+# function load predefined template co-ordinate from template.json file
+
 
 def load_template():
     with open('./template/template.json', 'r') as temp:
         template = json.load(temp)
     return template
+
+# function load textract block object.These objects represent lines of text or textual words that are detected on a
+# document page from a json file which are formatted on the basis our requirement. And the path of this file is defined
+# as a key value pair in "input_format_mapping.json"
 
 
 def load_input_format():
@@ -27,6 +33,8 @@ def load_input_format():
             input_format = json.loads(f.read())
         return input_format
 
+# This function convert the document(pdf) that is store in s3 bucket into image
+
 
 def convertPDFtoImage():
     obj = s3.Object('poc-cloudformation-bucket', fileName)
@@ -34,8 +42,10 @@ def convertPDFtoImage():
     images = convert_from_bytes(parse)
     return images
 
+# Function convert the bounding box co-ordinate from the ration of overall document page into pixels of (x0,y0),(x1,y1)
 
-def createShape(input_format, images):
+
+def createElementShape(input_format, images):
     shapes = []
     for shape in input_format:
         normalized_bounding_box = shape['geometry']
@@ -54,12 +64,14 @@ def createShape(input_format, images):
     return shapes
 
 
-def draw_bounding_box(image, shapes):
+# function draw rectangle over the image using the bounding box coordinate
+def draw_bounding_box(image, shapes, color):
     boxed_image = ImageDraw.Draw(image)
 
     for shape in shapes:
-        boxed_image.rectangle(shape, outline='red')
-    return boxed_image
+        boxed_image.rectangle(shape, outline=color)
+
+# function group element on the basis of the template defined and save the result as json file inside template/group_element/
 
 
 def grouping_element(input_formats, templates):
@@ -69,10 +81,13 @@ def grouping_element(input_formats, templates):
         group_elem = template
         elements = []
         for input_format in input_formats:
+            # Converting bounding box into x0,y0,x1,y1 co-ordinate
             group = Rect(template, create='No')
             elem = Rect(input_format)
-            if(group.check_box_inside_group(elem)):
+
+            if(group.check_element_inside_group(elem)):
                 elements.append(input_format)
+
         group_elem["elements"] = elements
         group_elements.append(group_elem)
 
@@ -87,13 +102,16 @@ def grouping_element(input_formats, templates):
 template = load_template()
 images = convertPDFtoImage()
 input_format = load_input_format()
-shapes = createShape(input_format, images)
+shapes = createElementShape(input_format, images)
 
-bounding_box_img = draw_bounding_box(images[0], shapes)
+draw_bounding_box(images[0], shapes, 'red')
+draw_bounding_box(images[0], list(map(
+    lambda a: [(a['x0'], a['y0']), (a['x1'], a['y1'])], template['group'])), 'green')
+
 
 images[0].show()
-# images[0].save("box.png",'PNG')
 
+# Assigning image resolution to static variable of class Rect
 Rect.img_dim = images[0].size
 
 group_elem = grouping_element(input_format, template['group'])

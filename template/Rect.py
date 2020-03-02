@@ -1,9 +1,11 @@
 class Rect:
 
+    # Static variable for storing image resolution
     img_dim = 0
 
     def __init__(self, shape, create="yes"):
         super().__init__()
+
         if create == 'yes':
             normalized_bounding_box = shape['geometry']
             absolute_bounding_box_width = normalized_bounding_box['Width'] * \
@@ -21,11 +23,9 @@ class Rect:
             self.x1 = shape["x1"]
             self.y1 = shape["y1"]
 
-    def check_box_inside_group(self, other):
-        if self.x0 <= other.x0 and self.y0 <= other.y0:
-            if self.x1 >= other.x1 and self.y1 >= other.y1:
-                return True
-            else:
-                return False
+    # function return true if the element is inside the template group else return false
+    def check_element_inside_group(self, other):
+        if self.x0 <= other.x0 and self.y0 <= other.y0 and self.x1 >= other.x1 and self.y1 >= other.y1:
+            return True
         else:
             return False
