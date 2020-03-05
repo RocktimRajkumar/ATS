@@ -1,13 +1,14 @@
 import boto3
 import json
 import os
+import re
 from os import path
 
-fileName = "myInvoice.pdf.json"
+fileName = "invoice.pdf"
 
 
 def load_template():
-    with open('./template/group_element/'+fileName, 'r') as elem:
+    with open('./template/group_element/{0}.json'.format(re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)), 'r') as elem:
         group_element = json.load(elem)
     return group_element
 
@@ -36,7 +37,7 @@ def detect_entities(group_element):
     if not path.isdir("template/entity_group_element"):
         os.mkdir("template/entity_group_element")
 
-    with open('./template/entity_group_element/{0}.json'.format(fileName), 'w+') as f:
+    with open('./template/entity_group_element/{0}.json'.format(re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)), 'w+') as f:
         f.write(json.dumps(entity_group))
 
     return entity_group

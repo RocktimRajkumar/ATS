@@ -1,6 +1,7 @@
 import boto3
 import time
 import json
+import re
 from json.decoder import JSONDecodeError
 import os
 from os import path
@@ -68,13 +69,13 @@ def save_input_format(input_format, jobId):
     with open('input_format_mapping.json', "r+") as f:
         try:
             content = json.load(f)
-            content[fileName] = 'input_format/{0}.json'.format(jobId)
+            content[re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)] = 'input_format/{0}.json'.format(jobId)
             f.seek(0)
             f.truncate(0)
             f.write(json.dumps(content))
         except JSONDecodeError:
             content = {}
-            content[fileName] = 'input_format/{0}.json'.format(jobId)
+            content[re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)] = 'input_format/{0}.json'.format(jobId)
             f.write(json.dumps(content))
 
         with open('input_format/{0}.json'.format(jobId), "w+") as outFile:

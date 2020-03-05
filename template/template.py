@@ -3,6 +3,7 @@ import boto3
 from PIL import Image, ImageDraw
 from pdf2image import convert_from_bytes
 from Rect import Rect
+import re
 import os
 from os import path
 
@@ -29,7 +30,7 @@ def load_input_format():
     input_format = None
     with open('./input_format_mapping.json', 'r') as f:
         content = json.load(f)
-        fileLoc = content[fileName]
+        fileLoc = content[re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)]
         with open(fileLoc) as f:
             input_format = json.loads(f.read())
         return input_format
@@ -95,7 +96,7 @@ def grouping_element(input_formats, templates):
     if not path.isdir("template/group_element"):
         os.mkdir("template/group_element")
 
-    with open('./template/group_element/{0}.json'.format(fileName), 'w+') as f:
+    with open('./template/group_element/{0}.json'.format(re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)), 'w+') as f:
         f.write(json.dumps(group_elements))
     return group_elements
 
