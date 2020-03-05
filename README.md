@@ -31,4 +31,5 @@
 
 or use the template which is already defined in template.json and upload invoice.pdf file in s3 bucket</br>
 4. Change the bucketName and fileName if required then Execute POC_input.py file, it will create the textract block object from the file in s3 bucket and format and store the response in json file.<br>
-5. Change the bucketName and fileName if required then Execute template/template.py file, it will group the element on the basis of template defined and store the result in template/group_element/*.json file.
+5. Change the bucketName and fileName if required then Execute template/template.py file, it will group the element on the basis of template defined and store the result in template/group_element/*.json file.<br>
+6. Change the fileName if required then Execute template/detect_group_entities.py file, it will classify the element into people, places, locations, date etc and store the result in template/entity_group_element*.json file.
