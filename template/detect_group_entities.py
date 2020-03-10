@@ -1,19 +1,18 @@
-import boto3
-import json
-import os
-import re
-from os import path
+if __name__ != '__main__':
+    from template.init import *
+else:
+    from init import *
 
-fileName = "invoice.pdf"
+comprehend = boto3.client('comprehend')
 
 
-def load_template():
+def load_group_element(fileName):
     with open('./template/group_element/{0}.json'.format(re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)), 'r') as elem:
         group_element = json.load(elem)
     return group_element
 
 
-def detect_entities(group_element):
+def detect_entities(group_element, fileName):
     entity_group = []
     for group in group_element:
         entities = {}
@@ -40,11 +39,15 @@ def detect_entities(group_element):
     with open('./template/entity_group_element/{0}.json'.format(re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)), 'w+') as f:
         f.write(json.dumps(entity_group))
 
-    return entity_group
+    return './template/entity_group_element/{0}.json'.format(re.search(r"^(.+)(\.[^.]*)$", fileName).group(1))
 
 
-group_element = load_template()
-
-comprehend = boto3.client('comprehend')
-
-entity_group = detect_entities(group_element)
+if __name__ == '__main__':
+    print('In detect_group_entities.py')
+    try:
+        fileName = sys.argv[1]
+        group_element = load_group_element(fileName)
+        entity_group_path = detect_entities(group_element, fileName)
+        print('Response of Entity Group Path {0}'.format(entity_group_path))
+    except IndexError:
+        print('Please provide S3 "File Name" while executing the program.')

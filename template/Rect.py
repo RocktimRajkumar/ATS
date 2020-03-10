@@ -9,12 +9,12 @@ class Rect:
         if create == 'yes':
             normalized_bounding_box = shape['geometry']
             absolute_bounding_box_width = normalized_bounding_box['Width'] * \
-                Rect.img_dim[0]
+                Rect.img_dim['width']
             absolute_bounding_box_height = normalized_bounding_box['Height'] * \
-                Rect.img_dim[1]
+                Rect.img_dim['height']
 
-            self.x0 = normalized_bounding_box['Left'] * Rect.img_dim[0]
-            self.y0 = normalized_bounding_box['Top'] * Rect.img_dim[1]
+            self.x0 = normalized_bounding_box['Left'] * Rect.img_dim['width']
+            self.y0 = normalized_bounding_box['Top'] * Rect.img_dim['height']
             self.x1 = self.x0 + absolute_bounding_box_width
             self.y1 = self.y0 + absolute_bounding_box_height
         else:

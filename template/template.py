@@ -1,24 +1,25 @@
-import json
-import boto3
-from PIL import Image, ImageDraw
-from pdf2image import convert_from_bytes
-from Rect import Rect
-import re
-import os
-from os import path
+if __name__ != '__main__':
+    from template.Rect import Rect
+    from template.init import *
+else:
+    from Rect import Rect
+    from init import *
 
 s3 = boto3.resource('s3')
 
 
-fileName = "invoice.pdf"
-bucketName = "poc-cloudformation-bucket"
+# fileName = "invoice.pdf"
+# bucketName = "poc-cloudformation-bucket"
 
 # function load predefined template co-ordinate from template.json file
 
 
-def load_template():
-    with open('./template/template.json', 'r') as temp:
+def load_template(templateName):
+    with open('./template/{0}.json'.format(get_file_name_without_extension(templateName)), 'r') as temp:
         template = json.load(temp)
+
+    # Assigning image resolution to static variable of class Rect
+    Rect.img_dim = template['resolution']
     return template
 
 # function load textract block object.These objects represent lines of text or textual words that are detected on a
@@ -26,11 +27,11 @@ def load_template():
 # as a key value pair in "input_format_mapping.json"
 
 
-def load_input_format():
+def load_input_format(fileName):
     input_format = None
     with open('./input_format_mapping.json', 'r') as f:
         content = json.load(f)
-        fileLoc = content[re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)]
+        fileLoc = content[get_file_name_without_extension(fileName)]
         with open(fileLoc) as f:
             input_format = json.loads(f.read())
         return input_format
@@ -38,7 +39,7 @@ def load_input_format():
 # This function convert the document(pdf) that is store in s3 bucket into image
 
 
-def convertPDFtoImage():
+def convert_pdf_to_image(bucketName, fileName):
     obj = s3.Object(bucketName, fileName)
     parse = obj.get()['Body'].read()
     images = convert_from_bytes(parse)
@@ -47,7 +48,7 @@ def convertPDFtoImage():
 # Function convert the bounding box co-ordinate from the ration of overall document page into pixels of (x0,y0),(x1,y1)
 
 
-def createElementShape(input_format, images):
+def create_element_shape(input_format, images):
     shapes = []
     for shape in input_format:
         normalized_bounding_box = shape['geometry']
@@ -76,7 +77,7 @@ def draw_bounding_box(image, shapes, color):
 # function group element on the basis of the template defined and save the result as json file inside template/group_element/
 
 
-def grouping_element(input_formats, templates):
+def grouping_element(input_formats, templates, fileName):
     group_elements = []
     for template in templates:
         group_elem = None
@@ -96,24 +97,34 @@ def grouping_element(input_formats, templates):
     if not path.isdir("template/group_element"):
         os.mkdir("template/group_element")
 
-    with open('./template/group_element/{0}.json'.format(re.search(r"^(.+)(\.[^.]*)$", fileName).group(1)), 'w+') as f:
+    with open('./template/group_element/{0}.json'.format(get_file_name_without_extension(fileName)), 'w+') as f:
         f.write(json.dumps(group_elements))
-    return group_elements
+    return 'template/group_element/{0}.json'.format(get_file_name_without_extension(fileName))
 
 
-template = load_template()
-images = convertPDFtoImage()
-input_format = load_input_format()
-shapes = createElementShape(input_format, images)
+if __name__ == '__main__':
+    print('In template.py')
+    try:
+        bucketName = sys.argv[1]
+        fileName = sys.argv[2]
+        templateName = sys.argv[3]
 
-draw_bounding_box(images[0], shapes, 'red')
-draw_bounding_box(images[0], list(map(
-    lambda a: [(a['x0'], a['y0']), (a['x1'], a['y1'])], template['group'])), 'green')
+        s3_obj = {"Bucket": bucketName, "Name": fileName}
+        templates = load_template(templateName)
+        input_format = load_input_format(fileName)
+        group_elem_path = grouping_element(
+            input_format, templates['group'], fileName)
 
+        images = convert_pdf_to_image(bucketName, fileName)
 
-images[0].show()
+        shapes = create_element_shape(input_format, images)
 
-# Assigning image resolution to static variable of class Rect
-Rect.img_dim = images[0].size
+        draw_bounding_box(images[0], shapes, 'red')
+        draw_bounding_box(images[0], list(map(
+            lambda a: [(a['x0'], a['y0']), (a['x1'], a['y1'])], templates['group'])), 'green')
 
-group_elem = grouping_element(input_format, template['group'])
+        images[0].show()
+
+        print('Response of Group Element Path {0}'.format(group_elem_path))
+    except IndexError:
+        print('Please provide S3 "Bucket Name" and "File Name" while executing the program.')
