@@ -1,7 +1,8 @@
 import sys
-import POC_input
+import get_document_detection
 import template.template as template
 import template.detect_group_entities as detect_group_entities
+
 
 try:
     bucketName = sys.argv[1]
@@ -10,10 +11,10 @@ try:
 
     s3_obj = {"Bucket": bucketName, "Name": fileName}
 
-    jobId = POC_input.start_job(s3_obj)
-    response = POC_input.get_document_detection(jobId)
-    input_format = POC_input.format_input(response)
-    input_format_path = POC_input.save_input_format(
+    jobId = get_document_detection.start_job(s3_obj)
+    response = get_document_detection.get_document_detection(jobId)
+    input_format = get_document_detection.format_input(response)
+    input_format_path = get_document_detection.save_input_format(
         input_format, jobId, fileName)
 
     templates = template.load_template(templateName)
