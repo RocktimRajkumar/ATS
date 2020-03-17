@@ -12,7 +12,7 @@ try:
     s3_obj = {"Bucket": bucketName, "Name": fileName}
 
     jobId = get_document_detection.start_job(s3_obj)
-    response = get_document_detection.get_document_detection(jobId)
+    response = get_document_detection.detect_document(jobId)
     input_format = get_document_detection.format_input(response)
     input_format_path = get_document_detection.save_input_format(
         input_format, jobId, fileName)

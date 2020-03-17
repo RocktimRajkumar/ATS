@@ -31,7 +31,7 @@ def is_job_complete(jobId):
     return status
 
 
-def get_document_detection(jobId):
+def detect_document(jobId):
     if(is_job_complete(jobId)):
         response = textract.get_document_text_detection(
             JobId=jobId
@@ -91,7 +91,7 @@ if __name__ == '__main__':
         fileName = sys.argv[2]
         s3_obj = {"Bucket": bucketName, "Name": fileName}
         jobId = start_job(s3_obj)
-        response = get_document_detection(jobId)
+        response = detect_document(jobId)
         input_format = format_input(response)
         input_format_path = save_input_format(input_format, jobId, fileName)
         print('Response of Input Format Path {0}'.format(input_format_path))
