@@ -12,7 +12,16 @@
 
 </center>
 
-> Intelligent Template based Data Extraction of significant fields and use them to extract meaningful information from all incoming documents with similar layouts.
+> Intelligent Template based Data Extraction of significant fields and use them as a meaningful information from all incoming documents with similar layouts.
+
+---
+
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
+
+
+1. Python 3.8 or later.
+2. AWS account.
 
 ---
 
@@ -29,23 +38,76 @@
 
 ## Description
 
-Creating ReadMe's for your Github repository can be tedious.  I hope this template can save you time and effort as well as provide you with some consistency across your projects.
+
 
 #### Technologies
 
-- Technology 1
-- Technology 2
+- AWS services (Textract, Comprehend)
+- Python
 ---
 
 ## How To Use
 
 #### Installation
+ The AWS Command Line Interface(CLI) is a unified tool to manage AWS services.
+ 
+**Windows**<br>
+[Download](https://awscli.amazonaws.com/AWSCLIV2.msi) 
 
+**Linux**
+```
+$ curl "https://awscli.amazonaws.com/$ awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+$ unzip awscliv2.zip
+$ sudo ./aws/install
+```
+
+**macOS**
+```
+$ curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+$ sudo installer -pkg AWSCLIV2.pkg -target /
+```
+
+    
 #### Configuration
+Configure AWS-CLI help you to interact with AWS services.These include your security credentials, the default output format, and the default AWS Region.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AWS requires that all incoming requests are cryptographically signed. The AWS CLI does this for you.<p>
+
+**Quickly Configuring the AWS CLI**
+```
+$ aws configure
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: us-west-2
+Default output format [None]: json
+```
+When you enter this command, the AWS CLI prompts you for four pieces of information (access key, secret access key, AWS Region, and output format)
+
+**To create access keys**
+
+1. Sign in to the AWS Management Console and open the IAM console at https://console.aws.amazon.com/iam/.
+
+2. In the navigation pane, choose Users.
+
+3. Choose the name of the user whose access keys you want to create, and then choose the Security credentials tab.
+
+4. In the Access keys section, choose Create access key.
+
+5. To view the new access key pair, choose Show. You will not have access to the secret access key again after this dialog box closes. Your credentials will look something like this: 
+    ``` 
+        Access key ID: AKIAIOSFODNN7EXAMPLE
+
+        Secret access key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+    ```
+
+6. To download the key pair, choose Download .csv file. Store the keys in a secure location. You will not have access to the secret access key again after this dialog box closes.
+
+7. Keep the keys confidential in order to protect your AWS account and never email them. Do not share them outside your organization, even if an inquiry appears to come from AWS or Amazon.com. No one who legitimately represents Amazon will ever ask you for your secret key.
+
+8. After you download the .csv file, choose Close. When you create an access key, the key pair is active by default, and you can use the pair right away.
 
 #### API Reference
 
-```html
+``` html
     <p>dummy code</p>
 ```
 
