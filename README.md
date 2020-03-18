@@ -1,32 +1,71 @@
-# Getting Start
-1. Configure aws cli using Access Key ID and Secret Access Key
-2. Create a s3 bucket
-3. Upload a document in s3 bucket and defined the co-ordinate in template/template.json file using the followinig format:
-> {</br>
-			&emsp;&emsp;"resolution":{</br>
-						&emsp;&emsp;&emsp;&emsp;"width": 1654,</br>
-						&emsp;&emsp;&emsp;&emsp;"height" 355</br>
-			&emsp;&emsp;&emsp;},</br>
-			&emsp;&emsp;"group":[</br>
-			&emsp;&emsp;&emsp;&emsp;{</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"gid": "0",</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"gname": "group name",</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"desc":"group description",</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"x0":83,</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"y0":23,</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"x1":832,</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"y1":344</br>
-			&emsp;&emsp;&emsp;&emsp;},</br>
-			&emsp;&emsp;&emsp;&emsp;{</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"gid": "1",</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"gname": "group name",</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"desc":"group description",</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"x0":83,</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"y0":23,</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"x1":832,</br>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"y1":344</br>
-			&emsp;&emsp;&emsp;&emsp;}</br>
-			&emsp;&emsp;]</br>
-			&emsp;}</br>
+# Template Based Information Extraction Rule (TIER) - Parser
+![Project Image](project-image-url)
 
-or use the template which is already defined in template.json and upload invoice.pdf file in s3 bucket</br>
+[![GitHub issues](https://img.shields.io/github/issues/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/issues)
+[![GitHub license](https://img.shields.io/github/license/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC)
+[![GitHub forks](https://img.shields.io/github/forks/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/network)
+[![GitHub stars](https://img.shields.io/github/stars/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/stargazers)
+
+> Intelligent Template based Data Extraction of significant fields and use them to extract meaningful information from all incoming documents with similar layouts.
+
+---
+
+### Table of Contents
+
+- [Description](#description)
+- [How To Use](#how-to-use)
+- [References](#references)
+- [License](#license)
+- [Author Info](#author-info)
+
+---
+
+## Description
+
+Creating ReadMe's for your Github repository can be tedious.  I hope this template can save you time and effort as well as provide you with some consistency across your projects.
+
+#### Technologies
+
+- Technology 1
+- Technology 2
+
+[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
+
+---
+
+## How To Use
+
+#### Installation
+
+#### Configuration
+
+#### API Reference
+
+```html
+    <p>dummy code</p>
+```
+[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
+
+---
+
+## References
+[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
+
+---
+
+## License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Licensed under the [MIT](LICENSE) license.
+
+[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
+
+---
+
+## Author Info
+
+- LinkedIn - [@RocktimRajkumar](https://www.linkedin.com/in/rocktim-rajkumar/)
+- Github - [@RocktimRajkumar](https://github.com/RocktimRajkumar)
+
+[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
