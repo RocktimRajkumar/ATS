@@ -2,9 +2,11 @@
 ![Project Image](project-image-url)
 
 [![GitHub issues](https://img.shields.io/github/issues/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/issues)
-[![GitHub license](https://img.shields.io/github/license/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub forks](https://img.shields.io/github/forks/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/network)
-[![GitHub stars](https://img.shields.io/github/stars/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/stargazers) 
+![GitHub repo size](https://img.shields.io/github/repo-size/RocktimRajkumar/AWS_POC)
+![GitHub contributors](https://img.shields.io/github/contributors/RocktimRajkumar/AWS_POC)
 
 > Intelligent Template based Data Extraction of significant fields and use them to extract meaningful information from all incoming documents with similar layouts.
 
@@ -28,9 +30,6 @@ Creating ReadMe's for your Github repository can be tedious.  I hope this templa
 
 - Technology 1
 - Technology 2
-
-[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
-
 ---
 
 ## How To Use
@@ -44,12 +43,10 @@ Creating ReadMe's for your Github repository can be tedious.  I hope this templa
 ```html
     <p>dummy code</p>
 ```
-[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
 
 ---
 
 ## References
-[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
 
 ---
 
@@ -59,7 +56,6 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the [MIT](LICENSE) license.
 
-[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
 
 ---
 
@@ -68,4 +64,3 @@ Licensed under the [MIT](LICENSE) license.
 - LinkedIn - [@RocktimRajkumar](https://www.linkedin.com/in/rocktim-rajkumar/)
 - Github - [@RocktimRajkumar](https://github.com/RocktimRajkumar)
 
-[Back To The Top](#Template-Based-Information-Extraction-Rule-(TIER)---Parser)
