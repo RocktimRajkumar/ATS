@@ -165,6 +165,15 @@ Create your template and save it inside the template directory as .json file.<br
     ```
     $ python main.py poc-cloud-bucket invoice.pdf template.json
     ```
+You will see output similar to the following:
+![output](template/output.png)
+
+The program creates 3 JSON files.
+* <p>First file contain all the Line of text detected in a document, it also returns the location and geometry of items found on a document page</p>
+
+* <p>Second file group the Line of text detected based on template</p>
+
+* <p>Third file read the group of the line of text and extract information like (invoice date, invoice number, date, name, address, etc).</p>
 
 
 
