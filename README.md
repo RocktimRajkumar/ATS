@@ -157,6 +157,14 @@ Create your template and save it inside the template directory as .json file.<br
        $ python main.py "bucketName" "fileName" "templateName"
     ```
 
+    > "bucketName" :- Name of the s3 bucket<br>
+"fileName" :- Name of the file in s3 bucket<br>
+"templateName" :- Name of the template created inside the template directory
+
+    e.g
+    ```
+    $ python main.py poc-cloud-bucket invoice.pdf template.json
+    ```
 
 
 
