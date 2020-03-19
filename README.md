@@ -29,7 +29,13 @@
 
 </p>
 
-> Intelligent Template-based Data Extraction of significant fields and use them as a piece of meaningful information from all incoming documents with similar layouts.
+>Power by Machine Learning, TIER-parser recognition processes is highly-variant invoices and documents in capabilities far beyond any Optical Character Recognition application Program.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It easily extracts complex data from highly varied, multifaceted business invoices.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our cloud-based technology ensures best-in-class security and scalability, as well as full 24/7 access on any device.
+
+**Features**
+* Build Reusable extraction templates based on text mining patterns and extract desired data from unstructured documents.
+* Automates the entires business process around the ingestion of unstructured data.
 
 ---
 
@@ -54,10 +60,23 @@ Before you begin, ensure you have met the following requirements:
 ---
 
 ## Description
+For a long time, we have relied on paper invoices to process payments and maintain accounts. Reconciling invoices typically involves someone manually spending hours browsing through several invoices and jotting things down in a ledger.
 
+>**But can this process be done better, more efficiently, with less wastage of paper, human labor and time?**
 
+So, we present you Template Based Information Extraction Rule(TIER)-Parser.
+<p>It's an Intelligent Template-based Data Extraction of significant fields and uses them as a piece of meaningful information from all incoming documents with similar layouts.</p>
 
-#### Technologies
+The system depends on the knowledge base. The knowledgebase contains facts and rules. The facts are derived from the Standard model like **AWS comprehend**. The rules represent
+the designed templates. The templates are helpful for detecting the meaning of the text. 
+
+### **How does TIER-Parser work?
+TIER-Parser is a three-step procedure:-
+* AWS textract analyzes the document thoroughly, extracts the essential data and format it as required.
+* Grouping the line of text based on the template.
+* Classifying the text such as (invoice date, address, name, etc). 
+
+### **Technologies**
 
 - AWS services (S3, Textract, Comprehend)
 - Python
