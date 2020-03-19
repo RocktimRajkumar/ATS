@@ -12,7 +12,7 @@
 
 </center>
 
-> Intelligent Template based Data Extraction of significant fields and use them as a meaningful information from all incoming documents with similar layouts.
+> Intelligent Template-based Data Extraction of significant fields and use them as a piece of meaningful information from all incoming documents with similar layouts.
 
 ---
 
@@ -75,7 +75,7 @@ $ sudo installer -pkg AWSCLIV2.pkg -target /
 
     
 ### **Configuration**
-Configure AWS-CLI help you to interact with AWS services.These include your security credentials, the default output format, and the default AWS Region.
+Configure AWS-CLI helps you to interact with AWS services. These include your security credentials, the default output format, and the default AWS Region.
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AWS requires that all incoming requests are cryptographically signed. The AWS CLI does this for you.<p>
 
 **Quickly Configuring the AWS CLI**
@@ -94,6 +94,46 @@ When you enter this command, the AWS CLI prompts you for four pieces of informat
 
 
 ### **Usage** 
+This section will instruct other people on how to use our project after they’ve installed it.
+1. **Designed Template**<br>
+The templates are designed according to the morphological,
+syntactical and vocabulary components of text sentences.<br>
+The designed templates are created for helping to get the meaningful extraction of text from the unstructured documents.<br>
+The template represents, resolution of the image and list of groups. Each group has its x0,y0, and x1,y1 co-ordinates, group id, name of the group and description.<br>
+i.e.
+![template](template/template.png)<br>
+In the above image red boxes are the groups and the green dots are the co-ordinates i.e x0,y0 and x1,y1
+*Syntax of Template*:-
+    ```
+    {
+        "resolution": {
+            "width": 1654,
+            "height": 2339
+                },
+        "group": [
+                {
+                    "gid": "0",
+                    "gname": "Group0",
+                    "desc": "Group0 Description",
+                    "x0": 70,
+                    "y0": 60,
+                    "x1": 639,
+                    "y1": 404
+                },
+                {
+                    "gid": "1",
+                    "gname": "Group1",
+                    "desc": "Group1 Description",
+                    "x0": 1046,
+                    "y0": 70,
+                    "x1": 1625,
+                    "y1": 375
+                }
+        ]
+    }
+
+    ```
+    Create your template and save it as .json file inside the template directory.
 
 
 ## Contributing 
@@ -106,7 +146,7 @@ To contribute to TIER-Parser, follow these steps:
 4. Push to the original branch: git push origin <project_name>/<location>
 5. Create the pull request.
 
-Alternatively see the GitHub documentation on creating a pull request.
+Alternatively, see the GitHub documentation on creating a pull request.
 
 ---
 
