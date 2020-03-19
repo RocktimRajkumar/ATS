@@ -70,7 +70,7 @@ So, we present you Template Based Information Extraction Rule(TIER)-Parser.
 The system depends on the knowledge base. The knowledgebase contains facts and rules. The facts are derived from the Standard model like **AWS comprehend**. The rules represent
 the designed templates. The templates are helpful for detecting the meaning of the text. 
 
-### **How does TIER-Parser work?
+### **How does TIER-Parser work?**
 TIER-Parser is a three-step procedure:-
 * AWS textract analyzes the document thoroughly, extracts the essential data and format it as required.
 * Grouping the line of text based on the template.
