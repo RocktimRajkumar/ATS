@@ -1,16 +1,33 @@
 # Template Based Information Extraction Rule (TIER) - Parser
 ![Project Image](project-image-url)
 
-<center>
+<p align="center">
+<a href="https://github.com/RocktimRajkumar/ATS/issues">
+<img src="https://img.shields.io/github/issues/RocktimRajkumar/ATS" alt="issue">
+</a>
 
-[![GitHub issues](https://img.shields.io/github/issues/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/issues)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub forks](https://img.shields.io/github/forks/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/network)
-[![GitHub stars](https://img.shields.io/github/stars/RocktimRajkumar/AWS_POC)](https://github.com/RocktimRajkumar/AWS_POC/stargazers) 
-![GitHub repo size](https://img.shields.io/github/repo-size/RocktimRajkumar/AWS_POC)
-![GitHub contributors](https://img.shields.io/github/contributors/RocktimRajkumar/AWS_POC)
+<a href="https://github.com/RocktimRajkumar/ATS/blob/master/LICENSE.md">
+ <img src="https://img.shields.io/badge/License-MIT-informational.svg" alt="ATS is released under the MIT license." />
+</a>
 
-</center>
+<a href="https://github.com/RocktimRajkumar/ATS/network">
+<img src="https://img.shields.io/github/forks/RocktimRajkumar/ATS?color=blueviolet" alt="forks">
+</a>
+
+
+<a href="https://github.com/RocktimRajkumar/ATS/stargazers">
+<img src="https://img.shields.io/github/stars/RocktimRajkumar/ATS?color=yellow" alt="stars">
+</a>
+
+<a href="#">
+<img src="https://img.shields.io/github/repo-size/RocktimRajkumar/ATS?color=green" alt="Repository Size">
+</a>
+
+<a href="#">
+<img src="https://img.shields.io/github/contributors/RocktimRajkumar/ATS" alt="Contributors">
+</a>
+
+</p>
 
 > Intelligent Template-based Data Extraction of significant fields and use them as a piece of meaningful information from all incoming documents with similar layouts.
 
@@ -102,7 +119,7 @@ The designed templates are created for helping to get the meaningful extraction 
 The template represents, resolution of the image and list of groups. Each group has its x0,y0, and x1,y1 co-ordinates, group id, name of the group and description.<br>
 i.e.
 ![template](template/template.png)<br>
-In the above image red boxes are the groups and the green dots are the co-ordinates i.e x0,y0 and x1,y1
+In the above image red boxes are the groups and the green dots are the co-ordinates i.e x0,y0 and x1,y1.<br>
 *Syntax of Template*:-
     ```
     {
@@ -133,7 +150,14 @@ In the above image red boxes are the groups and the green dots are the co-ordina
     }
 
     ```
-    Create your template and save it as .json file inside the template directory.
+Create your template and save it inside the template directory as .json file.<br>
+
+2. **Run Program**
+    ```
+       $ python main.py "bucketName" "fileName" "templateName"
+    ```
+
+
 
 
 ## Contributing 
