@@ -42,13 +42,13 @@ Before you begin, ensure you have met the following requirements:
 
 #### Technologies
 
-- AWS services (Textract, Comprehend)
+- AWS services (S3, Textract, Comprehend)
 - Python
 ---
 
 ## How To Use
 
-#### Installation
+### **Installation**
  The AWS Command Line Interface(CLI) is a unified tool to manage AWS services.
  
 **Windows**<br>
@@ -67,8 +67,14 @@ $ curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 $ sudo installer -pkg AWSCLIV2.pkg -target /
 ```
 
+**Requirements Files**<br>
+"Requirement Files" are files containing a list of items to be installed using pip install.  
+```
+    $ python -m pip install -r requirements.txt
+```
+
     
-#### Configuration
+### **Configuration**
 Configure AWS-CLI help you to interact with AWS services.These include your security credentials, the default output format, and the default AWS Region.
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AWS requires that all incoming requests are cryptographically signed. The AWS CLI does this for you.<p>
 
@@ -83,16 +89,12 @@ Default output format [None]: json
 When you enter this command, the AWS CLI prompts you for four pieces of information (access key, secret access key, AWS Region, and output format)
 
 **How To create access keys**
+
 [Steps](Create-Access-Key.md)
 
 
-#### API Reference
+### **Usage** 
 
-``` html
-    <p>dummy code</p>
-```
-
----
 
 ## Contributing 
 
