@@ -1,5 +1,9 @@
 # Template Based Information Extraction Rule (TIER) - Parser
-![Project Image](project-image-url)
+<p align="center">
+ <a href="https://media-exp1.licdn.com/dms/image/C560BAQFZ1nG-bnju2w/company-logo_200_200/0?e=2159024400&v=beta&t=WuKfeEccF7JVm71qILciqH20hxwAJSMGgalhq6W5e4I">
+<img src="https://media-exp1.licdn.com/dms/image/C560BAQFZ1nG-bnju2w/company-logo_200_200/0?e=2159024400&v=beta&t=WuKfeEccF7JVm71qILciqH20hxwAJSMGgalhq6W5e4I" alt="Project Image">
+</a>
+ </p>
 
 <p align="center">
 <a href="https://github.com/RocktimRajkumar/ATS/issues">
