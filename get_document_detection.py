@@ -52,23 +52,16 @@ def detect_document(jobId):
 
 
 def format_input(response):
-    input_format = []
-    id = 1
+    text = ""
     for item in response['Blocks']:
-        if item['BlockType'] == 'LINE' and item['Page'] == 1:
-            obj = {}
-            obj['eId'] = id
-            obj['geometry'] = item['Geometry']['BoundingBox']
-            obj['text'] = item['Text']
-            obj['Confidence'] = item['Confidence']
-            input_format.append(obj)
-            id += 1
-    return input_format
+        if item['BlockType'] == 'LINE':
+            text += " "+item['Text']
+    return text
 
 
-def save_input_format(input_format, jobId, fileName):
+def save_input_format(cv_text, jobId, fileName):
 
-    input_format_path = 'input_format/{0}.json'.format(jobId)
+    input_format_path = 'input_format/{0}.text'.format(jobId)
 
     if not path.exists("input_format_mapping.json"):
         with open('input_format_mapping.json', 'w+') as p:
@@ -91,7 +84,7 @@ def save_input_format(input_format, jobId, fileName):
             f.write(json.dumps(content))
 
         with open(input_format_path, "w+") as outFile:
-            outFile.write(json.dumps(input_format))
+            outFile.write(json.dumps(cv_text))
 
         return input_format_path
 
