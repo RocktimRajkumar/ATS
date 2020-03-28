@@ -7,6 +7,8 @@ import json
 from json.decoder import JSONDecodeError
 from nltk.corpus import stopwords
 import sys
+from editDistance import editDistance
+import multiprocessing as mp
 
 
 def get_file_name_without_extension(fileName):
@@ -59,6 +61,14 @@ def extract_email(email):
             return None
 
 
+def verify_skills(word, skills_data):
+    for skill in skills_data:
+        if editDistance(str(word).lower(), str(skill).lower()) < (len(str(word))//2)-1:
+            print(str(word)+'----->'+str(skill))
+            return str(word)
+    return False
+
+
 def extract_skills(resume_text):
     nlp_text = nlp(resume_text)
 
@@ -69,22 +79,22 @@ def extract_skills(resume_text):
     data = pd.read_csv("skills.csv")
 
     # extract values
-    skills = list(data.columns.values)
+    skills_data = list(data.columns.values)
 
-    skillset = []
+    pool = mp.Pool(mp.cpu_count())
 
-    # check for one-grams (example: python)
-    for token in tokens:
-        if token.lower() in skills:
-            skillset.append(token)
+    skills = [pool.apply_async(verify_skills, args=(
+        str(word), skills_data))for word in nlp_text.noun_chunks]
 
     # check for bi-grams and tri-grams (example: machine learning)
-    for token in nlp_text.noun_chunks:
-        token = token.text.lower().strip()
-        if token in skills:
-            skillset.append(token)
+    token_skills = [pool.apply_async(verify_skills, args=(
+        str(word), skills_data)) for word in tokens]
 
-    return [i.capitalize() for i in set([i.lower() for i in skillset])]
+    skills.extend(token_skills)
+
+    skills = [p.get() for p in skills if p.get() is not False]
+
+    return list(set(skills))
 
 
 # Grad all general stop words
