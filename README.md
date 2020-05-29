@@ -121,8 +121,8 @@ Configure AWS-CLI helps you to interact with AWS services. These include your se
 **Quickly Configuring the AWS CLI**
 ```
 $ aws configure
-AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
-AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+AWS Access Key ID [None]: AKIA************MPLE
+AWS Secret Access Key [None]: wJal************************EKEY
 Default region name [None]: us-west-2
 Default output format [None]: json
 ```
